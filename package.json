@@ -1,0 +1,24 @@
+{
+  "name": "osv2_stock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@devcubyn/carotte-runtime": "^9.3.0",
+    "@devcubyn/core.logger": "^1.0.1",
+    "carotte-amqp": "^3.2.0",
+    "chalk": "^4.1.2",
+    "dotenv": "^16.3.1",
+    "puid": "^1.0.7",
+    "trust-env": "^2.2.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  }
+}
