@@ -1,10 +1,9 @@
-const { publishInbound } = require('./helpers/publishers.js');
 const fs = require('fs');
 const env = require('./env');
 const { parseInboundEventsData } = require('./helpers/data-process.js');
+const { publishInbound } = require('./helpers/publishers.js');
 const { getInput, getInputYesOrNo, logInfo } = require('./helpers/cli-inputs.js');
 const chalk = require('chalk');
-const { error } = require('console');
 
 const publishEvents = async ({ events, allCount, logger }) => {
   let counter = 0;
@@ -33,12 +32,12 @@ const launch = async () => {
   let errorCount = 0;
   const totalCount = inboundEvents.length;
 
-  logInfo(`We have ${inboundEvents.length} inbound events to publish`);
+  logInfo(`We have ${totalCount} inbound events to publish`);
   const wantToContinue = await getInputYesOrNo('Do you want to continue?');
 
   if (wantToContinue) {
     const resultWriter = fs.createWriteStream(
-      `data/results/results-${new Date().toISOString()}.csv`,
+      `data/results/results-inbound-${new Date().toISOString()}.csv`,
       { flags: 'a' },
     );
 
@@ -79,5 +78,3 @@ const launch = async () => {
 };
 
 launch();
-
-// publishEvents(inboundEvents);

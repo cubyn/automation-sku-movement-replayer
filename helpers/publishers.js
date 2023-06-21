@@ -32,8 +32,9 @@ const publishInbound = async ({ event, counter, allCount, logger }) => {
   }
 };
 
-const publishOutbound = async (event, counter, allCount) => {
-  console.log(`Processing:${event.eventId}`);
+const publishOutbound = async ({ event, counter, allCount, logger }) => {
+  console.log(chalk.red('------------------------------NEW EVENT------------------'));
+  logInfo(`Processing event: ${event.eventId}`);
   try {
     await PublishRepository.publishOutbound({
       productId: event.productId,
@@ -41,10 +42,21 @@ const publishOutbound = async (event, counter, allCount) => {
       warehouseId: event.warehouseId,
       happenedAt: event.happenedAt,
     });
+    logger.write(`${event.eventId},success\n`);
+    logInfo(
+      `Processed:${counter}/${allCount}, eventId:${event.eventId}, status:  ${chalk.bgGreen(
+        'SUCCESS',
+      )}`,
+    );
+    return true;
   } catch (e) {
-    console.log(`Error:${event.eventId}`);
-  } finally {
-    console.log(`Processed:${counter}/${allCount}`);
+    logger.write(`${event.eventId},error\n`);
+    logInfo(
+      `Processed:${counter}/${allCount}, eventId:${event.eventId} , status: ${chalk.bgRed(
+        'ERROR',
+      )}`,
+    );
+    return false;
   }
 };
 
