@@ -9,7 +9,6 @@ const getInput = async (question) => {
 };
 const getInputYesOrNo = async (question) => {
   const result = await readline.question(chalk.blue.bold(`${question} (yes/no)\n`));
-  console.log('HI');
   return result === 'yes' ? true : false;
 };
 

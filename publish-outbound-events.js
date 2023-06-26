@@ -14,7 +14,7 @@ const { publishEvents } = require('./helpers/publishers.js');
 
 const launch = async () => {
   // We load in the events from the file we generated running the parse-data.js script
-  const eventsRawData = fs.readFileSync('data/relevantEvents.csv', {
+  const eventsRawData = fs.readFileSync('data/relevantOutboundEvents.csv', {
     encoding: 'utf8',
     flag: 'r',
   });
@@ -48,7 +48,7 @@ const launch = async () => {
   if (wantToContinue) {
     // WE want to save the results of the publishes into a file. (events, status(success/error), error message)
     const resultWriter = fs.createWriteStream(
-      `data/results/results-events-${new Date().toISOString()}.csv`,
+      `data/results/results-outbound-events-${new Date().toISOString()}.csv`,
       { flags: 'a' },
     );
 

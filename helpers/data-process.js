@@ -75,6 +75,7 @@ const formatEvents = (events, skuMapping) => {
     SKU_FOUND: 0,
   };
   const formattedEvents = events
+    .filter((event) => skuMapping[event.payload.data.sku.id])
     .map((event) => {
       results[event.payload.type]++;
       if (event.payload.type === 'SKU_INBOUNDED') {
