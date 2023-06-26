@@ -1,4 +1,3 @@
-const { notEqual } = require('assert');
 const chalk = require('chalk');
 const readline = require('node:readline/promises').createInterface({
   input: process.stdin,
@@ -28,9 +27,6 @@ const logBgRed = (message) => {
 const logBgGreen = (message) => {
   console.log(chalk.bold.bgGreen(message));
 };
-const logGreen = (message) => {
-  console.log(chalk.bold.green(message));
-};
 
 module.exports = {
   getInput,
@@ -39,5 +35,4 @@ module.exports = {
   logDivider,
   logBgRed,
   logBgGreen,
-  multipleChoiceQuestion,
 };

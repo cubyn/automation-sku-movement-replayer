@@ -60,10 +60,13 @@ const publishEvents = async ({ events, totalCount, logger, numberToProcess }) =>
     logInfo(`Processing event: ${event.eventId}`);
 
     const { isSuccess, errorType } = await publishOneEvent(event);
-
-    isSuccess
-      ? successCount++ && results[`${event.type}_SUCCESS`]++
-      : errorCount++ && results[`${event.type}_ERROR`]++;
+    if (isSuccess) {
+      successCount++;
+      results[`${event.type}_SUCCESS`]++;
+    } else {
+      errorCount++;
+      results[`${event.type}_ERROR`]++;
+    }
 
     const status = isSuccess ? chalk.bgGreen('SUCCESS') : chalk.bgRed('ERROR');
     logger.write(

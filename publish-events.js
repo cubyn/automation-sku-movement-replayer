@@ -13,10 +13,12 @@ const { sumResults } = require('./helpers/sum-results.js');
 const { publishEvents } = require('./helpers/publishers.js');
 
 const launch = async () => {
+  // We load in the events from the file we generated running the parse-data.js script
   const eventsRawData = fs.readFileSync('data/relevantEvents.csv', {
     encoding: 'utf8',
     flag: 'r',
   });
+  // We parse the events into Objects
   const events = parseRelevantEvents(eventsRawData);
 
   console.clear();
@@ -44,6 +46,7 @@ const launch = async () => {
   const wantToContinue = await getInputYesOrNo('Do you want to continue?');
 
   if (wantToContinue) {
+    // WE want to save the results of the publishes into a file. (events, status(success/error), error message)
     const resultWriter = fs.createWriteStream(
       `data/results/results-events-${new Date().toISOString()}.csv`,
       { flags: 'a' },
@@ -58,9 +61,8 @@ const launch = async () => {
       const howManyToProcess = await getInput(
         `How many events do you want to process out of the ${allCount}? (type 'all' to process all events)`,
       );
-
+      // Lazy
       if (howManyToProcess !== 'all' && isNaN(Number(howManyToProcess))) {
-        console.log('entering to exit ');
         break;
       }
 
